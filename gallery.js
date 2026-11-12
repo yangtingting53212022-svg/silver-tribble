@@ -33,6 +33,13 @@ const editError = document.querySelector('#edit-error');
 const uploadButton = document.querySelector('#upload');
 const renameButton = document.querySelector('#rename');
 const shared = document.documentElement.hasAttribute('data-shared');
+const deleteButton = document.createElement('button');
+deleteButton.type = 'button';
+deleteButton.className = 'manage';
+deleteButton.textContent = '删除作品';
+deleteButton.hidden = true;
+renameButton.after(deleteButton);
+
 
 function createMedia(work, preview) {
   const media = document.createElement(work.video ? 'video' : 'img');
@@ -56,6 +63,7 @@ function createMedia(work, preview) {
 function showWork(index) {
   activeIndex = (index + visibleWorks.length) % visibleWorks.length;
   const work = visibleWorks[activeIndex];
+  deleteButton.hidden = shared || !work.blob;
   document.querySelector('#work-title').textContent = work.name;
   document.querySelector('#position').textContent = (activeIndex + 1) + ' / ' + visibleWorks.length;
   const media = createMedia(work, false);
@@ -155,6 +163,33 @@ fileInput.onchange = () => {
   if (!nameInput.value.trim() && fileInput.files[0]) {
     nameInput.value = fileInput.files[0].name.replace(/\.[^.]+$/, '').slice(0, 120);
   }
+};
+
+
+deleteButton.onclick = async () => {
+  const work = visibleWorks[activeIndex];
+  if (!database || !work?.blob || !work.key || deleteButton.disabled) return;
+  if (!window.confirm('删除「' + work.name + '」？此操作无法撤销。')) return;
+
+  deleteButton.disabled = true;
+  try {
+    await new Promise((resolve, reject) => {
+      const transaction = database.transaction('works', 'readwrite');
+      transaction.oncomplete = resolve;
+      transaction.onabort = () => reject(transaction.error);
+      transaction.objectStore('works').delete(work.key);
+    });
+  } catch {
+    window.alert('删除失败，请重试。');
+    return;
+  } finally {
+    deleteButton.disabled = false;
+  }
+  collection = collection.filter(item => item !== work);
+  viewer.close();
+  render(activeFilter);
+  URL.revokeObjectURL(work.url);
+  (grid.querySelector('.card') || uploadButton).focus();
 };
 
 function storeWork(record) {
