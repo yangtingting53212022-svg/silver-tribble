@@ -15,7 +15,6 @@ const designerName = designerLink.textContent;
 const defaultDesigner = 'yang-tingting';
 designerLink.setAttribute('aria-current', 'page');
 document.querySelector('#designer-title').textContent = designerName + '的作品';
-document.title = designerName + ' · ' + document.title;
 const originalWorks = [];
 const cover = document.querySelector('.cover');
 const showCoverFallback = () => cover.closest('.hero').classList.add('cover-missing');
