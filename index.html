@@ -1,0 +1,61 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="华夏瑞程 Q3 优秀设计展示，浏览平面作品与动态影像。">
+<title>华夏瑞程 · Q3 优秀设计展示</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="works.js"></script>
+<script defer src="gallery.js"></script>
+</head>
+<body>
+<header class="hero" id="top">
+  <img class="cover" src="media/cover.png" alt="" fetchpriority="high">
+  <div class="flare" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <b>华夏瑞程 <span>HXRC</span></b>
+    <p>WORKS SHOWCASE</p>
+    <h1>Q3优秀设计展示</h1>
+    <i>Showcase of Outstanding Designs<br>3rd Quarter</i>
+  </div>
+  <a class="enter" href="#works">浏览作品 <span aria-hidden="true">↓</span></a>
+</header>
+<main id="works" class="showcase">
+  <nav class="designers" aria-label="选择设计师">
+    <a href="?designer=yang-tingting#works" data-designer="yang-tingting">杨婷婷</a>
+    <a href="?designer=jiang-xin#works" data-designer="jiang-xin">姜馨</a>
+    <a href="?designer=wang-gang#works" data-designer="wang-gang">王刚</a>
+  </nav>
+  <div class="heading">
+    <div><p class="eyebrow">SELECTED WORKS</p><h2 id="designer-title">杨婷婷的作品</h2></div>
+    <div class="gallery-tools"><div class="filters" role="group" aria-label="作品类别">
+      <button type="button" data-filter="all" aria-pressed="true">全部</button>
+      <button type="button" data-filter="image" aria-pressed="false">平面设计</button>
+      <button type="button" data-filter="video" aria-pressed="false">动态影像</button>
+    </div><label class="date-filter">时间 <select id="month"><option value="all">全部时间</option></select></label><button type="button" class="manage" id="upload" disabled>＋ 上传作品</button></div>
+  </div>
+  <p id="count" role="status"></p>
+  <p id="notice" role="status" hidden></p>
+  <p id="empty" hidden></p>
+  <div id="grid" class="grid"></div>
+</main>
+<footer><strong>华夏瑞程 / HXRC</strong><a href="#top">返回顶部 ↑</a></footer>
+<dialog id="viewer" aria-labelledby="work-title">
+  <div class="viewer-head"><h2 id="work-title"></h2><div class="viewer-actions"><button type="button" class="manage" id="rename" disabled>编辑作品</button><button type="button" id="close" aria-label="关闭预览" autofocus>×</button></div></div>
+  <div id="stage"></div>
+  <div class="viewer-nav"><button type="button" id="prev">← 上一件</button><span id="position"></span><button type="button" id="next">下一件 →</button></div>
+</dialog>
+<dialog id="editor" aria-labelledby="editor-title">
+  <form id="edit-form">
+    <h2 id="editor-title">上传作品</h2>
+    <label id="file-label">图片或视频<input id="file" type="file" accept="image/*,video/*"></label>
+    <label>作品名称<input id="name" type="text" maxlength="120" required></label>
+    <label>作品日期（选填）<input id="work-date" type="date" min="1900-01-01" max="9999-12-31"></label>
+    <p class="local-note">作品和名称保存在当前浏览器。</p>
+    <p id="edit-error" role="alert" hidden></p>
+    <div class="viewer-actions"><button type="button" class="manage" id="cancel-edit">取消</button><button type="submit" class="manage primary">保存</button></div>
+  </form>
+</dialog>
+</body>
+</html>
