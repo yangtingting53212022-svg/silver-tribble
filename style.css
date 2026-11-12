@@ -12,3 +12,11 @@ dialog{width:min(94vw,1060px);max-height:94dvh;padding:0;background:#11131d;bord
 .gallery-tools,.viewer-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.manage{background:#171e34;border:1px solid #54658e;border-radius:24px;padding:9px 15px;white-space:nowrap;font-size:13px}.manage:hover{background:#263556}.manage:disabled{opacity:.45;cursor:default}.primary{background:var(--accent);color:#08090e}.primary:hover{background:#b8cbff}#editor{width:min(92vw,470px)}#edit-form{display:grid;gap:17px;padding:26px}#edit-form h2{font-size:23px}#edit-form label{font-size:14px}#edit-form input{display:block;width:100%;margin-top:8px;padding:10px;background:#080a13;color:var(--ink);border:1px solid #40465d;border-radius:7px;font:inherit}#edit-form .viewer-actions{justify-content:flex-end}.local-note,#notice{color:var(--muted);font-size:13px;margin:0}#edit-error{color:#ff9caa;margin:0;font-size:13px}
 .designers{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 30px}.designers a{padding:10px 19px;border:1px solid var(--line);border-radius:24px;color:var(--muted);text-decoration:none;font-size:14px}.designers a:hover{border-color:var(--accent);color:var(--ink)}.designers a[aria-current=page]{border-color:var(--accent);background:#1b2644;color:var(--ink)}#empty{margin:22px 0 0;padding:42px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
 .date-filter{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:13px}.date-filter select{max-width:100%;background:#121522;color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:8px 10px;font:inherit}.meta{flex-wrap:wrap}.meta>span{overflow-wrap:anywhere}
+
+.hero.cover-missing{min-height:min(630px,80vh);background:radial-gradient(ellipse at 80% 26%,#192b69,transparent 58%),linear-gradient(135deg,#080910 42%,#192960 63%,#080910 78%)}
+.cover-missing .cover{display:none}
+.cover-missing .hero-copy{position:relative;width:auto;height:auto;clip-path:none;overflow:visible;margin:0 6% 35px}
+.cover-missing .hero-copy b{display:block;margin-bottom:35px}
+.cover-missing .hero-copy b span{color:var(--accent)}
+.cover-missing .hero-copy p{letter-spacing:.3em;color:#cbd4f3}
+.cover-missing .hero-copy h1{font-size:clamp(32px,7vw,112px);margin:14px 0;font-style:italic}
