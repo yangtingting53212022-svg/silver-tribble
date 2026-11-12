@@ -16,7 +16,11 @@ const defaultDesigner = 'yang-tingting';
 designerLink.setAttribute('aria-current', 'page');
 document.querySelector('#designer-title').textContent = designerName + '的作品';
 document.title = designerName + ' · ' + document.title;
-const originalWorks = designer === defaultDesigner ? works : [];
+const originalWorks = [];
+const cover = document.querySelector('.cover');
+const showCoverFallback = () => cover.closest('.hero').classList.add('cover-missing');
+cover.addEventListener('error', showCoverFallback);
+if (cover.complete && !cover.naturalWidth) showCoverFallback();
 let collection = [...originalWorks];
 let database;
 let editing;
@@ -290,7 +294,23 @@ if (shared) {
   });
 } else {
   try {
-    enableEditing();
+    if (designer === defaultDesigner) {
+      Promise.all(works.map(async work => {
+        try {
+          const response = await fetch('media/' + work.file, {method: 'HEAD'});
+          return response.ok ? work : null;
+        } catch {
+          return null;
+        }
+      })).then(available => {
+        originalWorks.push(...available.filter(Boolean));
+        collection = [...originalWorks];
+        render(activeFilter);
+        enableEditing();
+      }).catch(storageUnavailable);
+    } else {
+      enableEditing();
+    }
   } catch {
     storageUnavailable();
   }
